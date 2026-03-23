@@ -1,0 +1,12 @@
+python main.py read ./images/03508649.ube16_64_512_512.raw --encoding ube16 --channels 64 --width 512 --height 512
+
+python main.py entropy ./images/03508649.ube16_64_512_512.raw --encoding ube16 --channels 64 --width 512 --height 512
+
+python main.py quantize ./images/03508649.ube16_64_512_512.raw ./out/03508649_multi_quantized.raw --encoding ube16 --channels 64 --width 512 --height 512 --qstep 10
+
+python main.py dequantize ./out/03508649_multi_quantized.raw ./out/03508649_multi_dequantized.raw --encoding sle16 --channels 64 --width 512 --height 512 --qstep 10 --original ./images/03508649.ube16_64_512_512.raw --original-encoding ube16
+
+# --- Encode / Decode ---
+python main.py encode ./images/03508649.ube16_64_512_512.raw ./out/03508649_multi.comp --encoding ube16 --channels 64 --width 512 --height 512 --qstep 10 --mode 3
+
+python main.py decode ./out/03508649_multi.comp ./out/03508649_multi_final.raw

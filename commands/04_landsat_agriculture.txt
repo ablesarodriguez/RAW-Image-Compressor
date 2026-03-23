@@ -1,0 +1,12 @@
+python main.py read ./images/Landsat_agriculture.ube16_6_1024_1024.raw --encoding ube16 --channels 6 --width 1024 --height 1024
+
+python main.py entropy ./images/Landsat_agriculture.ube16_6_1024_1024.raw --encoding ube16 --channels 6 --width 1024 --height 1024
+
+python main.py quantize ./images/Landsat_agriculture.ube16_6_1024_1024.raw ./out/Landsat_agriculture_quantized.raw --encoding ube16 --channels 6 --width 1024 --height 1024 --qstep 10
+
+python main.py dequantize ./out/Landsat_agriculture_quantized.raw ./out/Landsat_agriculture_dequantized.raw --encoding sle16 --channels 6 --width 1024 --height 1024 --qstep 10 --original ./images/Landsat_agriculture.ube16_6_1024_1024.raw --original-encoding ube16
+
+# --- Encode / Decode ---
+python main.py encode ./images/Landsat_agriculture.ube16_6_1024_1024.raw ./out/Landsat_agriculture.comp --encoding ube16 --channels 6 --width 1024 --height 1024 --qstep 10 --mode 3
+
+python main.py decode ./out/Landsat_agriculture.comp ./out/Landsat_agriculture_final.raw

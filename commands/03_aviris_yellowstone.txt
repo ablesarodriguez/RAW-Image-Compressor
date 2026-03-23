@@ -1,0 +1,12 @@
+python main.py read ./images/aviris_yellowstone_f060925t01p00r12_sc00_cal.sbe16_224_512_677.raw --encoding sbe16 --channels 224 --width 512 --height 677
+
+python main.py entropy ./images/aviris_yellowstone_f060925t01p00r12_sc00_cal.sbe16_224_512_677.raw --encoding sbe16 --channels 224 --width 512 --height 677
+
+python main.py quantize ./images/aviris_yellowstone_f060925t01p00r12_sc00_cal.sbe16_224_512_677.raw ./out/aviris_yellowstone_quantized.raw --encoding sbe16 --channels 224 --width 512 --height 677 --qstep 10
+
+python main.py dequantize ./out/aviris_yellowstone_quantized.raw ./out/aviris_yellowstone_dequantized.raw --encoding sle16 --channels 224 --width 512 --height 677 --qstep 10 --original ./images/aviris_yellowstone_f060925t01p00r12_sc00_cal.sbe16_224_512_677.raw --original-encoding sbe16
+
+# --- Encode / Decode ---
+python main.py encode ./images/aviris_yellowstone_f060925t01p00r12_sc00_cal.sbe16_224_512_677.raw ./out/aviris_yellowstone.comp --encoding sbe16 --channels 224 --width 512 --height 677 --qstep 10 --mode 3
+
+python main.py decode ./out/aviris_yellowstone.comp ./out/aviris_yellowstone_final.raw

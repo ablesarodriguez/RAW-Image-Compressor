@@ -1,0 +1,12 @@
+python main.py read ./images/mamo_1.ube16_1_3576_2944.raw --encoding ube16 --channels 1 --width 3576 --height 2944
+
+python main.py entropy ./images/mamo_1.ube16_1_3576_2944.raw --encoding ube16 --channels 1 --width 3576 --height 2944
+
+python main.py quantize ./images/mamo_1.ube16_1_3576_2944.raw ./out/mamo_1_ube16_quantized.raw --encoding ube16 --channels 1 --width 3576 --height 2944 --qstep 10
+
+python main.py dequantize ./out/mamo_1_ube16_quantized.raw ./out/mamo_1_ube16_dequantized.raw --encoding sle16 --channels 1 --width 3576 --height 2944 --qstep 10 --original ./images/mamo_1.ube16_1_3576_2944.raw --original-encoding ube16
+
+# --- Encode / Decode ---
+python main.py encode ./images/mamo_1.ube16_1_3576_2944.raw ./out/mamo_1_ube16.comp --encoding ube16 --channels 1 --width 3576 --height 2944 --qstep 10 --mode 3
+
+python main.py decode ./out/mamo_1_ube16.comp ./out/mamo_1_ube16_final.raw

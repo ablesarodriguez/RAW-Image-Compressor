@@ -1,0 +1,21 @@
+# --- 1. Pruebas de Funciones Individuales ---
+# Argumentos comunes: inputpath (posicional) + flags (--width, --height, etc.)
+
+python main.py read ./images/03508649.ube16_1_512_512.raw --encoding ube16 --channels 1 --width 512 --height 512
+
+python main.py write ./images/03508649.ube16_1_512_512.raw ./out/03508649_output.raw --encoding ube16 --channels 1 --width 512 --height 512
+
+python main.py entropy ./images/03508649.ube16_1_512_512.raw --encoding ube16 --channels 1 --width 512 --height 512
+
+python main.py quantize ./images/03508649.ube16_1_512_512.raw ./out/03508649_quantized.raw --encoding ube16 --channels 1 --width 512 --height 512 --qstep 10
+
+python main.py dequantize ./out/03508649_quantized.raw ./out/03508649_dequantized.raw --encoding sle16 --channels 1 --width 512 --height 512 --qstep 10 --original ./images/03508649.ube16_1_512_512.raw --original-encoding ube16
+
+python main.py predict ./images/03508649.ube16_1_512_512.raw ./out/03508649_residue.raw --encoding ube16 --channels 1 --width 512 --height 512 --mode 3
+
+python main.py reconstruct ./out/03508649_residue.raw ./out/03508649_reconstructed.raw --encoding sle16 --channels 1 --width 512 --height 512 --mode 3 --original ./images/03508649.ube16_1_512_512.raw --original-encoding ube16
+
+# --- 2. CICLO COMPLETO (Encode -> Decode) ---
+python main.py encode ./images/03508649.ube16_1_512_512.raw ./out/03508649.comp --encoding ube16 --channels 1 --width 512 --height 512 --qstep 10 --mode 3
+
+python main.py decode ./out/03508649.comp ./out/03508649_final.raw

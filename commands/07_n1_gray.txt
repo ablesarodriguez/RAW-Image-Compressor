@@ -1,0 +1,12 @@
+python main.py read ./images/n1_GRAY.ube8_1_2560_2048.raw --encoding ube8 --channels 1 --width 2560 --height 2048
+
+python main.py entropy ./images/n1_GRAY.ube8_1_2560_2048.raw --encoding ube8 --channels 1 --width 2560 --height 2048
+
+python main.py quantize ./images/n1_GRAY.ube8_1_2560_2048.raw ./out/n1_GRAY_quantized.raw --encoding ube8 --channels 1 --width 2560 --height 2048 --qstep 10
+
+python main.py dequantize ./out/n1_GRAY_quantized.raw ./out/n1_GRAY_dequantized.raw --encoding sle16 --channels 1 --width 2560 --height 2048 --qstep 10 --original ./images/n1_GRAY.ube8_1_2560_2048.raw --original-encoding ube8
+
+# --- Encode / Decode ---
+python main.py encode ./images/n1_GRAY.ube8_1_2560_2048.raw ./out/n1_GRAY.comp --encoding ube8 --channels 1 --width 2560 --height 2048 --qstep 10 --mode 3
+
+python main.py decode ./out/n1_GRAY.comp ./out/n1_GRAY_final.raw
